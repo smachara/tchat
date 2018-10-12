@@ -1,1 +1,1 @@
-<?php $this->titre = "T-CHAT"; ?>
+<?php $this->titre = "Bienvenue"; ?>

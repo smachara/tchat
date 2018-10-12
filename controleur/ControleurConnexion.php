@@ -25,27 +25,39 @@ class ControleurConnexion extends Controleur {
 
     public function check() {
 
-        $surnom = $this->requete->getParametre("surnom");
-        $mdp = $this->requete->getParametre("mdp");
+        if ($this->requete->existeParametre("surnom") &&
+            $this->requete->existeParametre("mdp")) {
 
-        if ( isset($_POST['login']) )
-        {
-            if (!is_null($this->user->chercherUtilisateur($surnom,$mdp))) {
-                echo "login";
-            }else{
-                throw new Exception("les données de connexion sont incorrectes");
-            };
+            $surnom = $this->requete->getParametre("surnom");
+            $mdp = $this->requete->getParametre("mdp");
 
-        }else if (isset($_POST['sign_up']) ){
-            $user = $this->user->chercherUtilisateurParSurnom($surnom);
-            if (is_null($user)) {
-                $this->user->ajouterUtilisateur($surnom,$mdp);
-                echo "signup";
-            };
+            if ( isset($_POST['login']) )
+            {
+                $user = $this->user->chercherUtilisateur($surnom,$mdp);
+                if (!is_null($user)) {
 
+                    $this->requete->getSession()->setAttribut("idUtilisateur",
+                        $user['idUtilisateur']);
+                    $this->requete->getSession()->setAttribut("surnom",
+                        $user['surnom']);
+                    $this->rediriger("Chat");
+                }else{
+                    throw new Exception("les données de connexion sont incorrectes");
+                    $this->rediriger("Accueil");
+                };
+
+            }else if (isset($_POST['sign_up']) ){
+                $user = $this->user->chercherUtilisateurParSurnom($surnom);
+                if (is_null($user)) {
+                    $this->user->ajouterUtilisateur($surnom,$mdp);
+                    echo "signup"; die();
+                }else {
+                    throw new Exception("L'utilisateur existe déjà");
+                    $this->rediriger("Accueil");
+                }
+            }
         }
-        // Exécution de l'action par défaut pour réafficher la liste des billets
-//        $this->executerAction("index");
+
 
 
     }

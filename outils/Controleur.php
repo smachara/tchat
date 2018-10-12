@@ -58,4 +58,13 @@ abstract class Controleur {
         $vue->generer($donneesVue);
     }
 
+    /**
+     * Effectue une redirection vers un contrôleur et une action spécifiques
+     */
+    protected function rediriger($controleur, $action = null)
+    {
+        $racineWeb = Configuration::get("racineWeb", "/");
+        // Redirection vers l'URL racine_site/controleur/action
+        header("Location:" . $racineWeb . $controleur . "/" . $action);
+    }
 }

@@ -12,7 +12,7 @@ class Utilisateur extends Modele
 {
 
     public function chercherUtilisateur($surnom, $mdp) {
-        $sql = 'select id, surnom from utilisateurs'
+        $sql = 'select id as idUtilisateur, surnom from utilisateurs'
             . ' where surnom=? and mdp=?';
         $utilisateur = $this->executerRequete($sql, array($surnom, $mdp));
         if ($utilisateur->rowCount() > 0)
@@ -24,7 +24,7 @@ class Utilisateur extends Modele
 
 
     public function chercherUtilisateurParSurnom($surnom) {
-        $sql = 'select id, surnom from utilisateurs'
+        $sql = 'select id as idUtilisateur, surnom from utilisateurs'
             . ' where surnom=?';
         $utilisateur = $this->executerRequete($sql, array($surnom));
         if ($utilisateur->rowCount() > 0)
