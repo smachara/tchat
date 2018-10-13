@@ -45,7 +45,7 @@ class Requete {
             return $this->parametres[$nom];
         }
         else {
-            throw new Exception("Paramètre '$nom' absent de la requête");
+            return null;//throw new Exception("Paramètre '$nom' absent de la requête");
         }
     }
 

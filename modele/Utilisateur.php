@@ -11,6 +11,15 @@ require_once 'outils/Modele.php';
 class Utilisateur extends Modele
 {
 
+    public function getUsersWithoutSender($id_user_emetteur) {
+        $sql = 'SELECT * FROM utilisateurs '
+             . 'WHERE id <> ?  ';
+        $users = $this->executerRequete($sql, array($id_user_emetteur));
+        return $users;
+    }
+
+
+
     public function chercherUtilisateur($surnom, $mdp) {
         $sql = 'select id as idUtilisateur, surnom from utilisateurs'
             . ' where surnom=? and mdp=?';
@@ -21,6 +30,15 @@ class Utilisateur extends Modele
             return null; // throw new Exception("Aucun utilisateur ne correspond à l'identifiant '$surnom'");
     }
 
+    public function chercherUtilisateurParID($id) {
+        $sql = 'select surnom from utilisateurs'
+            . ' where id=? ';
+        $utilisateur = $this->executerRequete($sql, array($id));
+        if ($utilisateur->rowCount() > 0)
+            return $utilisateur->fetch();  // Accès à la première ligne de résultat
+        else
+            return null; // throw new Exception("Aucun utilisateur ne correspond à l'identifiant '$surnom'");
+    }
 
 
     public function chercherUtilisateurParSurnom($surnom) {
@@ -38,4 +56,5 @@ class Utilisateur extends Modele
             . ' values(?, ?)';
         return $this->executerRequete($sql, array( $surnom, $mdp));
     }
+
 }
