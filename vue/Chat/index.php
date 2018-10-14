@@ -9,10 +9,11 @@
                 <div class="chat friend">
                     <a href="chat/<?= $this->nettoyer($user['id']) ?>  " >
                         <?= $this->nettoyer($user['surnom']) ?> </a>
-                    <div class="notification">
-                        <?= $this->nettoyer($user['notification']) ?>
-                    </div>
+
                 </div>
+                <span class="notification">
+                        <?= $this->nettoyer($user['notification']) ?>
+                </span>
             <?php endforeach; ?>
 
         </div>

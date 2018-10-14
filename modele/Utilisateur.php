@@ -13,21 +13,14 @@ class Utilisateur extends Modele
 
     public function getUsersWithoutSender($id_user_emetteur) {
 
-        $sql = 'SELECT u.*, COUNT(m.lu) as notification'
-            . ' FROM  utilisateurs u '
-            . ' LEFT JOIN messages m'
-            . ' ON u.id = m.id_user_emetteur'
-            . ' WHERE u.id <> ? and  m.lu = false'
-            . ' GROUP BY u.id HAVING COUNT(m.lu) > 0'
-            . ' UNION'
-            . ' SELECT u.*, COUNT(m.lu) as notification'
-            . ' FROM  utilisateurs u '
-            . ' LEFT JOIN messages m'
-            . ' ON u.id = m.id_user_emetteur'
-            . ' WHERE u.id <> ? '
-            . ' GROUP BY u.id HAVING COUNT(m.lu) = 0';
+        $sql = 'SELECT u.*, SUM(CASE WHEN m.lu = 0 THEN 1 ELSE 0 END) AS notification'
+                . ' FROM  utilisateurs u'
+                . ' LEFT JOIN messages m'
+                . ' ON u.id = m.id_user_emetteur'
+                . ' WHERE u.id <> ? '
+                . ' GROUP BY u.id ';
 
-        $users = $this->executerRequete($sql, array($id_user_emetteur, $id_user_emetteur));
+        $users = $this->executerRequete($sql, array($id_user_emetteur));
         return $users;
     }
 

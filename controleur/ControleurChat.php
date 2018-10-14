@@ -24,13 +24,15 @@ class ControleurChat extends ControleurSecurise {
 
 
         $messages = $this->message->getMessagesByUser($idUtilisateur, $idTo);
-        $users = $this->user->getUsersWithoutSender($idUtilisateur);
 
         $current_receiver = $this->user->chercherUtilisateurParID($idTo);
-
         $this->updateMessageNotifications();
 
+        $users = $this->user->getUsersWithoutSender($idUtilisateur);
+
+
         $this->genererVue(array('messages'=>$messages,'users'=> $users ,'idUtilisateur'=>$idUtilisateur, 'surnomUtilisateur'=>$surnomUtilisateur, 'current_receiver'=> $current_receiver ));
+
     }
 
 
@@ -46,12 +48,10 @@ class ControleurChat extends ControleurSecurise {
 
     //mettre à jour les notifications d'émetteur
     private function updateMessageNotifications() {
-        echo 'pasa';
         $idTo = $this->requete->getParametre("id");
         $idUtilisateur = $this->requete->getSession()->getAttribut("idUtilisateur");
 
         $this->message->updateEmmiterNotificatios( $idTo, $idUtilisateur);
-
     }
 
 }

@@ -267,5 +267,21 @@ a:hover, a:active {
     width: 100% ;
     margin: 20px auto;
 
+.notification{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
 
 }

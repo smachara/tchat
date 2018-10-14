@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 14 Octobre 2018 à 08:48
+-- Généré le :  Dim 14 Octobre 2018 à 21:36
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -31,7 +31,8 @@ CREATE TABLE `messages` (
   `id_user_emetteur` int(11) NOT NULL,
   `id_user_recepteur` int(11) NOT NULL,
   `message` varchar(2000) NOT NULL,
-  `cree_a` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `cree_a` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lu` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -73,12 +74,12 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Contraintes pour les tables exportées
 --
