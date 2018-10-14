@@ -1,5 +1,11 @@
 <?php $this->titre = "Vue Chat"; ?>
+<?php
 
+$self = $_SERVER['PHP_SELF'];
+echo 'refresh:10; url=' . '/chat/' . $current_receiver['id'];
+header('refresh:3; url=' . '/chat/' . $current_receiver['id']);
+
+?>
 
 <div class="container">
 

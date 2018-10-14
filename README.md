@@ -9,7 +9,7 @@ Cette application a été développée selon le modèle de développement MVC sa
  -  Liste des messages archivés
  -  Possibilité de dialoguer avec les autres membres
  -  Un minimum de sécurité (chaque utilisateur ne peut voir que ses messages et s'il n'est pas connecté, il est renvoyé à la page de connexion)
-
+ -  Un affichage ‘temps réel’
 ## Les exigences
 - PHP 5.6.30 ou supérieur
 - Apache
@@ -53,3 +53,5 @@ ou configurez apache (httpd.conf) pour lire la source depuis un autre emplacemen
     |   `-- README.md	ce fichier
     |
 
+## Git Repository
+	git clone https://github.com/smachara/tchat.git
