@@ -77,4 +77,7 @@ class Vue {
         return htmlspecialchars($valeur, ENT_QUOTES, 'UTF-8', false);
     }
 
+    public function formatDate($date){
+        return date('g:i a', strtotime($date));
+    }
 }

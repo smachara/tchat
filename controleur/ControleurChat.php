@@ -21,27 +21,37 @@ class ControleurChat extends ControleurSecurise {
         $idUtilisateur = $this->requete->getSession()->getAttribut("idUtilisateur");
         $surnomUtilisateur = $this->requete->getSession()->getAttribut("surnom");
 
+
+
         $messages = $this->message->getMessagesByUser($idUtilisateur, $idTo);
         $users = $this->user->getUsersWithoutSender($idUtilisateur);
+
         $current_receiver = $this->user->chercherUtilisateurParID($idTo);
 
+        $this->updateMessageNotifications();
 
-
-        $this->genererVue(array('messages'=>$messages,'users'=> $users  ,'idUtilisateur'=>$idUtilisateur, $surnomUtilisateur, $current_receiver ));
+        $this->genererVue(array('messages'=>$messages,'users'=> $users ,'idUtilisateur'=>$idUtilisateur, 'surnomUtilisateur'=>$surnomUtilisateur, 'current_receiver'=> $current_receiver ));
     }
 
 
-    // Ajoute un commentaire sur un billet
     public function envoyer() {
 
         $idTo = $this->requete->getParametre("id");
         $idUtilisateur = $this->requete->getSession()->getAttribut("idUtilisateur");
         $message = $this->requete->getParametre("message");
-
-var_dump($_POST);
         $this->message->ajouterMessage($idUtilisateur, $idTo, $message);
 
-        // Exécution de l'action par défaut pour réafficher la liste des billets
         $this->executerAction("index");
     }
+
+    //mettre à jour les notifications d'émetteur
+    private function updateMessageNotifications() {
+        echo 'pasa';
+        $idTo = $this->requete->getParametre("id");
+        $idUtilisateur = $this->requete->getSession()->getAttribut("idUtilisateur");
+
+        $this->message->updateEmmiterNotificatios( $idTo, $idUtilisateur);
+
+    }
+
 }

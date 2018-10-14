@@ -18,8 +18,13 @@ class ControleurConnexion extends Controleur {
         $this->user = new Utilisateur();
     }
 
+    public function  deconnexion(){
+        $this->requete->getSession()->detruire();
+        $this->rediriger("Accueil");
+    }
 
     public function index() {
+
         $this->genererVue(array());
     }
 
@@ -50,16 +55,13 @@ class ControleurConnexion extends Controleur {
                 $user = $this->user->chercherUtilisateurParSurnom($surnom);
                 if (is_null($user)) {
                     $this->user->ajouterUtilisateur($surnom,$mdp);
-                    echo "signup"; die();
+                    $this->rediriger("chat");
                 }else {
                     throw new Exception("L'utilisateur existe déjà");
                     $this->rediriger("Accueil");
                 }
             }
         }
-
-
-
     }
 
 }

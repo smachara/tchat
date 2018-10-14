@@ -50,7 +50,8 @@ class Session
             return $_SESSION[$nom];
         }
         else {
-            throw new Exception("Attribut '$nom' absent de la session");
+//            throw new Exception("Attribut '$nom' absent de la session");
+              null;
         }
     }
 }

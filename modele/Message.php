@@ -27,4 +27,10 @@ class Message extends Modele
 
         $this->executerRequete($sql, array($id_user_emetteur, $id_user_recepteur, $message));
     }
+
+    public function updateEmmiterNotificatios($id_user_emetteur, $id_user_recepteur) {
+        $sql ='UPDATE `messages` SET `lu` = 1 WHERE `id_user_emetteur` = ? AND id_user_recepteur = ?';
+        $this->executerRequete($sql, array($id_user_emetteur, $id_user_recepteur));
+    }
+
 }
